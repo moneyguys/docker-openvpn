@@ -36,5 +36,5 @@ app = FastAPI()
 def read_root(certificate_create_request: CertificateCreateRequest):
     certificate_user = certificate_create_request.certificate_user
     expired_in = certificate_create_request.expired_in
-    cert_path, err = create_certificate_for_user(certificate_user,expired_in)
+    cert_path, err = create_certificate_for_user(certificate_user, expired_in)
     return {"certificate_user": certificate_user, "expired_in": expired_in, 'cert_path': cert_path, 'err':err}
