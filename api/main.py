@@ -4,6 +4,8 @@ from loguru import logger
 from pydantic import BaseModel
 from fastapi import FastAPI
 
+from fastapi.responses import FileResponse
+
 
 class CertificateCreateRequest(BaseModel):
     certificate_user: str
@@ -37,4 +39,7 @@ def read_root(certificate_create_request: CertificateCreateRequest):
     certificate_user = certificate_create_request.certificate_user
     expired_in = certificate_create_request.expired_in
     cert_path, err = create_certificate_for_user(certificate_user, expired_in)
-    return {"certificate_user": certificate_user, "expired_in": expired_in, 'cert_path': cert_path, 'err':err}
+    if cert_path is not None:
+        return FileResponse(cert_path)
+    else:
+        return {"certificate_user": certificate_user, "expired_in": expired_in, 'cert_path': cert_path, 'err':err}
