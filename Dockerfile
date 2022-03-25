@@ -27,8 +27,8 @@ EXPOSE 8080/tcp
 COPY ./api/requirements.txt /code/requirements.txt
 COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
-COPY ./api/entrypoint.sh ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+COPY ./api/entrypoint.sh ./code/entrypoint.sh
+ENTRYPOINT ["./code/entrypoint.sh"]
 
 
 ADD ./bin /usr/local/bin
