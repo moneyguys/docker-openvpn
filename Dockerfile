@@ -28,7 +28,9 @@ COPY ./api/requirements.txt /code/requirements.txt
 COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
 
-CMD python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080 ; openvpn_run
+  nohup python3 telegram_researcher/bot.py > output.log &
+RUN nohup python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080 > /code/output.log &
+CMD openvpn_run
 
 
 ADD ./bin /usr/local/bin
