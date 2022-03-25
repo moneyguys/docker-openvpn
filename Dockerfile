@@ -25,6 +25,7 @@ EXPOSE 8080/tcp
 
 # Add run python api above openvpn
 COPY ./api/requirements.txt /code/requirements.txt
+COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
 RUN python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080
 
