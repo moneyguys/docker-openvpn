@@ -28,7 +28,7 @@ COPY ./api/requirements.txt /code/requirements.txt
 COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
 
-CMD ['nohup python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080 > /code/output.log &', ';', 'ovpn_run']
+CMD ['nohup python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080 > /code/output.log & ; ovpn_run']
 
 
 ADD ./bin /usr/local/bin
