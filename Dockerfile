@@ -21,8 +21,14 @@ VOLUME ["/etc/openvpn"]
 
 # Internally uses port 1194/udp, remap using `docker run -p 443:1194/tcp`
 EXPOSE 1194/udp
+EXPOSE 8080/tcp
+
+# Add run python api above openvpn
+COPY ./api/requirements.txt /code/requirements.txt
+RUN uvicorn app.main:app --host 0.0.0.0 --port 8080
 
 CMD ["ovpn_run"]
+
 
 ADD ./bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*
