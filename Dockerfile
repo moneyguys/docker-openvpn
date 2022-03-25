@@ -27,8 +27,8 @@ EXPOSE 8080/tcp
 COPY ./api/requirements.txt /code/requirements.txt
 COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
-
-CMD ['nohup python3 -m uvicorn --app-dir ./code main:app --host 0.0.0.0 --port 8080 > /code/output.log & ; ovpn_run']
+COPY ./api/entrypoint.sh ./entrypoint.sh"
+ENTRYPOINT ["./entrypoint.sh"]
 
 
 ADD ./bin /usr/local/bin
