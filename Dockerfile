@@ -27,9 +27,9 @@ EXPOSE 8080/tcp
 COPY ./api/requirements.txt /code/requirements.txt
 COPY ./api/main.py /code/main.py
 RUN pip3 install -r /code/requirements.txt
-COPY ./api/entrypoint.sh ./code/entrypoint.sh
-RUN ["chmod", "+x", "./code/entrypoint.sh"]
-ENTRYPOINT ["./code/entrypoint.sh"]
+COPY ./api/entrypoint.sh /code/entrypoint.sh
+RUN ["chmod", "+x", "/code/entrypoint.sh"]
+ENTRYPOINT ["/code/entrypoint.sh"]
 
 
 ADD ./bin /usr/local/bin
